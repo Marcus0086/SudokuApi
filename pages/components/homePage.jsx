@@ -14,19 +14,21 @@ import { useRouter } from 'next/router';
 export default function Home({ grid }) {
   const [_document, setDocument] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const [valarr, setGrid] = useState([]);
   const router = useRouter();
   const gridarr = [];
   useEffect(() => {
     setDocument(document);
     setLoading(false);
     if (grid !== undefined) {
-      grid.map((val, idx) => {
+      grid.value.map((val, idx) => {
         const valarr = [];
         val.map((val2, idx2) => {
           valarr.push(idx2 === 2 || idx2 === 5 ? "  " + val2 + "  " + "|" : "  " + val2 + "  ");
         })
         gridarr.push(idx === 3 || idx === 6 ? '---------------------------------------------\n\n' + valarr.join("") + "\n\n" : valarr.join("") + '\n\n');
       });
+      setGrid(gridarr);
     }
 
   }, [grid]);
@@ -82,11 +84,11 @@ export default function Home({ grid }) {
               <p>Loading.......</p>
               : <NewBoard>
                 <code>
-                  {gridarr.map((val, idx) => (
+                  {valarr ? valarr.map((val, idx) => (
                     <div key={idx}>
                       {val}
                     </div>
-                  ))}
+                  )) : ''}
                 </code>
               </NewBoard>}
           </BoardBox>

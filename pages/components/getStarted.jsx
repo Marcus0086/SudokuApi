@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const GetStarted = ({ id }) => {
-    const query1 = "http://localhost:3000/api/dosuku?query={newboard{grid{value}}}";
+    const query1 = "https://sudoku-api.vercel.app/api/dosuku?query={newboard{grid{value}}}";
     return (
         <Container id={id}>
             <TextBox>
@@ -18,14 +18,14 @@ const GetStarted = ({ id }) => {
                     <InfoP>
                         You don't have to install any library or do any setup in order<br />
                         to get a new sudoku board. Just make a GET request to<br />
-                        API: http://localhost:3000/api/dosuku
+                        API: https://sudoku-api.vercel.app/api/dosuku
                     </InfoP>
                     <InfoSubTitle>Make a GET request using following:</InfoSubTitle>
                     <ul>
                         <li>
                             <Code width='auto'>
                                 <Line>
-                                    curl -v http://localhost:3000/api/dosuku
+                                    curl -v https://sudoku-api.vercel.app/api/dosuku
                                 </Line>
                             </Code>
                         </li>
@@ -35,7 +35,7 @@ const GetStarted = ({ id }) => {
                         <li>
                             <Code width='auto'>
                                 <Line>
-                                    http://localhost:3000/api/dosuku
+                                    https://sudoku-api.vercel.app/api/dosuku
                                 </Line>
                             </Code>
                         </li>
@@ -78,7 +78,7 @@ const GetStarted = ({ id }) => {
                     <ul>
                         <li>
                             <Code width='auto'>
-                                <Line>{'http://localhost:3000/api/dosuku?query={newboard{grid{solution}}}'}</Line>
+                                <Line>{'https://sudoku-api.vercel.app/api/dosuku?query={newboard{grid{solution}}}'}</Line>
                             </Code>
                         </li>
                     </ul>
@@ -86,7 +86,7 @@ const GetStarted = ({ id }) => {
                     <ul>
                         <li>
                             <Code width='auto'>
-                                <Line>{'http://localhost:3000/api/dosuku?query={newboard{difficulty}}'}</Line>
+                                <Line>{'https://sudoku-api.vercel.app/api/dosuku?query={newboard{difficulty}}'}</Line>
                             </Code>
                         </li>
                     </ul>

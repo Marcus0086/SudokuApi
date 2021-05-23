@@ -4,15 +4,13 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { useState, useEffect } from "react";
 import { IconButton } from "@material-ui/core";
 
-const Main = () => {
+const Main = ({ grid, difficulty, message }) => {
   const [_document, setDocument] = useState(null);
-  const [grid, setGrid] = useState([[]]);
   useEffect(() => {
     setDocument(document);
     if (_document != null) {
       window.onscroll = () => TopOnOff();
     }
-    setGrid([[]]);
   }, [_document]);
 
   const TopOnOff = () => {
@@ -33,7 +31,7 @@ const Main = () => {
   }
   return (
     <div>
-      <Home grid={grid} />
+      <Home grid={grid} difficulty={difficulty} message={message} />
       <UpButton id="up" onClick={() => ToTop()}>
         <UpArrowKey />
       </UpButton>
@@ -55,3 +53,22 @@ const UpArrowKey = styled(KeyboardArrowUpIcon)`
   
 `;
 export default Main;
+
+
+export async function getServerSideProps(context) {
+  const res = await fetch('https://sudoku-api.vercel.app/api/dosuku', { method: 'GET' });
+  const data = await res.json();
+  if (!data) {
+    return {
+      notFound: true
+    };
+  }
+  const { grid, difficulty, message } = data;
+  return {
+    props: {
+      grid: grid,
+      difficulty: difficulty,
+      message: message
+    }
+  };
+}
