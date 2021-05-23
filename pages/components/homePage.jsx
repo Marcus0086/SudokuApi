@@ -37,7 +37,7 @@ export default function Home({ grid }) {
   }
 
   const gridarr = [];
-  grid.value.map((val, idx) => {
+  grid.map((val, idx) => {
     const valarr = [];
     val.map((val2, idx2) => {
       valarr.push(idx2 === 2 || idx2 === 5 ? "  " + val2 + "  " + "|" : "  " + val2 + "  ");
