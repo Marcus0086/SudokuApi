@@ -15,9 +15,20 @@ export default function Home({ grid }) {
   const [_document, setDocument] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
+  const gridarr = [];
   useEffect(() => {
     setDocument(document);
     setLoading(false);
+    if (grid !== undefined) {
+      grid.map((val, idx) => {
+        const valarr = [];
+        val.map((val2, idx2) => {
+          valarr.push(idx2 === 2 || idx2 === 5 ? "  " + val2 + "  " + "|" : "  " + val2 + "  ");
+        })
+        gridarr.push(idx === 3 || idx === 6 ? '---------------------------------------------\n\n' + valarr.join("") + "\n\n" : valarr.join("") + '\n\n');
+      });
+    }
+
   }, [grid]);
 
   const getToDiv = id => {
@@ -36,14 +47,7 @@ export default function Home({ grid }) {
     }, 0);
   }
 
-  const gridarr = [];
-  grid.map((val, idx) => {
-    const valarr = [];
-    val.map((val2, idx2) => {
-      valarr.push(idx2 === 2 || idx2 === 5 ? "  " + val2 + "  " + "|" : "  " + val2 + "  ");
-    })
-    gridarr.push(idx === 3 || idx === 6 ? '---------------------------------------------\n\n' + valarr.join("") + "\n\n" : valarr.join("") + '\n\n');
-  });
+
   return (
     <div>
       <Container>
