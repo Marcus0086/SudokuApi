@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { IconButton, Button } from "@material-ui/core"
 import { GitHub } from "@material-ui/icons";
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -18,9 +18,9 @@ export default function Home({ grid }) {
   const router = useRouter();
   const gridarr = [];
   useEffect(() => {
+    setLoading(true);
     setDocument(document);
-    setLoading(false);
-    if (grid !== undefined) {
+    if (grid !== undefined && grid.value !== undefined) {
       grid.value.map((val, idx) => {
         const valarr = [];
         val.map((val2, idx2) => {
@@ -29,8 +29,10 @@ export default function Home({ grid }) {
         gridarr.push(idx === 3 || idx === 6 ? '---------------------------------------------\n\n' + valarr.join("") + "\n\n" : valarr.join("") + '\n\n');
       });
       setGrid(gridarr);
+      setTimeout(() => {
+        setLoading(false);
+      }, 250);
     }
-
   }, [grid]);
 
   const getToDiv = id => {
@@ -64,7 +66,7 @@ export default function Home({ grid }) {
           <h3 onClick={() => getToDiv('working')}>Working</h3>
           <h3 onClick={() => getToDiv('about')}>About</h3>
           <Link href="https://github.com/Marcus0086">
-            <IconButton>
+            <IconButton aria-label='gitbutton'>
               <GitHubIcon />
             </IconButton>
           </Link>
@@ -81,7 +83,13 @@ export default function Home({ grid }) {
           </SubTitle>
           <BoardBox>
             {isLoading ?
-              <p>Loading.......</p>
+              <NewBoard>
+                <code>
+                  {[...Array(9).keys()].map((val, idx) => (
+                    <Row key={idx} width={idx === 0 ? '1.35rem' : idx * 2.35 + 'rem'} />
+                  ))}
+                </code>
+              </NewBoard>
               : <NewBoard>
                 <code>
                   {valarr ? valarr.map((val, idx) => (
@@ -92,7 +100,8 @@ export default function Home({ grid }) {
                 </code>
               </NewBoard>}
           </BoardBox>
-          <DownButton onClick={() => getToDiv('start')}>
+          <GetNewBoard onClick={getNewBoard} variant='outlined'>Get new board</GetNewBoard>
+          <DownButton onClick={() => getToDiv('start')} aria-label="donwbutton">
             <DownKey />
           </DownButton>
         </TitleBox>
@@ -264,4 +273,44 @@ const NewBoard = styled.pre`
       transform: scale(0.99);
       transition: all .25s ease-in-out;
     }
+`;
+const Load = keyframes`
+  0% {
+    background-color: grey;
+  }
+  90% {
+    background: hsla(0,0%,4%,.8);
+  }
+    
+`;
+
+const Row = styled.div`
+  width: ${props => props.width};
+  background-color: grey;
+  height: 1.2rem;
+  margin: 1rem;
+  border-radius: .25rem;
+  @media (max-width:800px) {
+    height: 1.2rem;
+    margin: .5rem;
+  }
+  animation: ${Load} .25s linear infinite;
+`;
+
+const GetNewBoard = styled(Button)`
+  &&& {
+    position: absolute;
+    top: 48rem;
+    color: white;
+    border-radius: 1.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    border: 1px solid white;
+    @media(max-width:800px) {
+      top: 42rem;
+    }
+    @media(max-width:650px) {
+      display: none;
+    }
+  }
 `;

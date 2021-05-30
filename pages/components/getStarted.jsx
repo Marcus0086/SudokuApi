@@ -52,12 +52,12 @@ const GetStarted = ({ id }) => {
                     </ul>
                 </Info>
                 <LogoBox>
-                    <SetupLogo src='/features.svg' loading='lazy' />
+                    <SetupLogo src='/features.svg' loading='lazy' alt='installlogo' />
                 </LogoBox>
             </InfoBox>
             <InfoBoxo>
                 <LogoBox>
-                    <SetupLogo src='/query.svg' loading='lazy' />
+                    <SetupLogo src='/query.svg' loading='lazy' alt='nodeslogo' />
                 </LogoBox>
                 <Info>
                     <InfoTitle>Query various parameters</InfoTitle>

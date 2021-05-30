@@ -19,7 +19,7 @@ const About = ({ id }) => {
                     <InfoSubTitle>Doskuku is being used in a game made by AdditcoX "Puzzle.It"</InfoSubTitle>
                 </Info>
                 <LogoBox>
-                    <Logo src='/logo.png' />
+                    <Logo src='/logo.png' loading='lazy' alt='Logo' />
                 </LogoBox>
             </Box>
         </Container>
