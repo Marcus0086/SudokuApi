@@ -18,8 +18,12 @@ export default function Home({ grid }) {
   const router = useRouter();
   const gridarr = [];
   useEffect(() => {
+    document.documentElement.lang = 'en-us';
+  }, []);
+  useEffect(() => {
     setLoading(true);
     setDocument(document);
+
     if (grid !== undefined && grid.value !== undefined) {
       grid.value.map((val, idx) => {
         const valarr = [];
@@ -56,6 +60,7 @@ export default function Home({ grid }) {
     <div>
       <Container>
         <Head>
+          <meta name='description' content="A Sudoku api made in graphql. Solve Sudoku query a 9x9 board and get it's solution" />
           <title>
             Dosuku Home Page
           </title>
