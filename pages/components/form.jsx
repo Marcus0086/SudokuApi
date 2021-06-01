@@ -4,6 +4,8 @@ import { useState } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import * as EmailValidator from 'email-validator';
+
 const Form = ({ id }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -16,6 +18,7 @@ const Form = ({ id }) => {
     const [messageText, setMessageText] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSent, setIsSent] = useState(false);
     const sendMail = async () => {
 
         if (name.length === 0 && email.length === 0 && message.length === 0) {
@@ -39,13 +42,21 @@ const Form = ({ id }) => {
 
             }
         } else {
-            setIsLoading(true);
-            const data = { name: name, email: email, message: message };
-            await fetch('/api/mail', {
-                method: 'POST',
-                body: JSON.stringify(data),
-            }).then((resp) => setIsLoading(false));
-            setIsDisabled(true);
+            if (EmailValidator.validate(email)) {
+                setIsLoading(true);
+                const data = { name: name, email: email, message: message };
+                await fetch('/api/mail', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                }).then((resp) => {
+                    setIsSent(true);
+                    setIsLoading(false);
+                });
+                setIsDisabled(true);
+            } else {
+                setIsEmptyemail(true);
+                setEmailText('Email is not valid');
+            }
         }
     }
     const getName = val => {
@@ -84,7 +95,7 @@ const Form = ({ id }) => {
                         defaultValue={email} onChange={(e) => getEmail(e.target.value)} helperText={emailText} /><br />
                     <MessageInput required id='standard-required' error={isEmptyMessage ? true : false} type='text' label='Your Message'
                         defaultValue={message} onChange={(e) => getMessage(e.target.value)} helperText={messageText} /><br />
-                    <SendButton onClick={sendMail} variant='outlined' color='primary'
+                    <SendButton onClick={sendMail} variant='outlined' color={isSent ? 'primary' : 'secondary'}
                         disabled={isDisabled} aria-label='message-send'>{isLoading ? <Loading /> : <DoneIcon />}</SendButton>
                 </ContactForm>
             </CardContainer>
@@ -161,7 +172,7 @@ const MessageInput = styled(NameInput)`
 `;
 const SendButton = styled(Button)`
     &&& {
-        color: grey;
+        color: ${props => props.color === 'primary' ? 'green' : 'grey'};
         border-radius: 1.5rem;
         padding-left: 2.5rem;
         padding-right: 2.5rem;

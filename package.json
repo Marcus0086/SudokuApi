@@ -14,6 +14,7 @@
     "@sendgrid/mail": "^7.4.4",
     "axios": "^0.21.1",
     "cross-env": "^7.0.3",
+    "email-validator": "^2.0.4",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "next": "10.2.0",
