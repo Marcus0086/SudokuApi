@@ -279,7 +279,7 @@ const Working = ({ id }) => {
     )
 }
 
-const Container = styled.div`
+const Container = styled.section`
     padding-top: 6rem;
     padding-bottom: 6rem;
     height: 55rem;

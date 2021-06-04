@@ -62,7 +62,7 @@ export default function Home({ grid }) {
         <Head>
           <meta name='description' content="A Sudoku api made in graphql. Solve Sudoku query a 9x9 board and get it's solution" />
           <title>
-            Dosuku Home Page
+            Dosuku
           </title>
         </Head>
         <Background />
@@ -120,7 +120,7 @@ export default function Home({ grid }) {
 }
 
 const linearGradient = 'linear-gradient(135deg,#0e5358,#e5b0a1)'
-const Container = styled.div`
+const Container = styled.section`
   height: 56rem;
   position: relative;
   color: #fff;

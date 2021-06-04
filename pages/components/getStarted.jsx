@@ -96,7 +96,7 @@ const GetStarted = ({ id }) => {
     )
 }
 
-export const Container = styled.div`
+export const Container = styled.section`
     padding-top: 6rem;
     padding-bottom: 5rem;
     text-align: center;
