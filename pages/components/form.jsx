@@ -104,7 +104,6 @@ const Form = ({ id }) => {
 }
 const FormContainer = styled.div`
     position: fixed;
-    position: fixed;
     top: 0;
     left: 0;    
     height: 100%;

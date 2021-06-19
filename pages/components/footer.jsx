@@ -108,7 +108,6 @@ const TweetButton = styled(IconButton)`
     }
 `;
 
-const GitButton = styled(TweetButton)``;
 const LinkedButton = styled(TweetButton)``;
 const ContactButton = styled(TweetButton)`
 `;
