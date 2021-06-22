@@ -118,7 +118,7 @@ const UpArrowKey = styled(KeyboardArrowUpIcon)`
 export default Main;
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const sudoku = new Sudoku();
   sudoku.generate();
   const value = sudoku.grid;
