@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const GetStarted = ({ id }) => {
-    const query1 = "https://sudoku-api.vercel.app/api/dosuku?query={newboard{grid{value}}}";
+    const query1 = "https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}";
     return (
         <Container id={id}>
             <TextBox>
@@ -78,7 +78,7 @@ const GetStarted = ({ id }) => {
                     <ul>
                         <li>
                             <Code width='auto'>
-                                <Line>{'https://sudoku-api.vercel.app/api/dosuku?query={newboard{grid{solution}}}'}</Line>
+                                <Line>{'https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{solution}}}'}</Line>
                             </Code>
                         </li>
                     </ul>
@@ -86,7 +86,15 @@ const GetStarted = ({ id }) => {
                     <ul>
                         <li>
                             <Code width='auto'>
-                                <Line>{'https://sudoku-api.vercel.app/api/dosuku?query={newboard{difficulty}}'}</Line>
+                                <Line>{'https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{difficulty}}}'}</Line>
+                            </Code>
+                        </li>
+                    </ul>
+                    <InfoSubTitle>Get Multiple results by changing the limit</InfoSubTitle>
+                    <ul>
+                        <li>
+                            <Code width='auto'>
+                                <Line>{'https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:5){grids{value,solution,difficulty},results,message}}'}</Line>
                             </Code>
                         </li>
                     </ul>

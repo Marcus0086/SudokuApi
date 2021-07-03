@@ -3,7 +3,7 @@ import { resolvers } from "./resolvers/resolvers";
 import { graphql } from "graphql";
 
 export default async (req, res) => {
-  let query = `{ newboard {grid { value, solution}, difficulty, message} }`;
+  let query = `{ newboard(limit:${1}) {grids { value, solution, difficulty}, results, message} }`;
   let resp = "";
   if (req.query.query || req.query.query !== undefined) {
     query = req.query.query;
@@ -13,8 +13,7 @@ export default async (req, res) => {
   } catch (err) {
     alert(err);
   }
-  const { newboard } = !resp.data ? { newboard: { message: 'Incorrect query!' } } : await resp.data;
-
-  await res.status(200).json(JSON.stringify(newboard, null, 4));
+  const data = await resp?.data;
+  await res.status(200).json(JSON.stringify(data, null, 4));
   res.end();
 };

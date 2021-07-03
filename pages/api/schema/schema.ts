@@ -2,17 +2,18 @@ import { buildSchema } from "graphql";
 
 export const typeDefs = buildSchema(`
     type Query {
-        newboard: puzzle!, 
+        newboard(limit:Int!): puzzle!, 
     }
 
     type puzzle {
-        grid: data!,
-        difficulty: String,
+        grids: [data!]!,
+        results: Int,
         message: String
     }
 
     type data {
         value:[[Int!]]!,
-        solution:[[Int!]]!
+        solution:[[Int!]]!,
+        difficulty: String
     }
 `);
